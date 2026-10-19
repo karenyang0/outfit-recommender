@@ -1,14 +1,18 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const closetItems = sqliteTable("closet_items", {
+export const items = sqliteTable("items", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
-  category: text("category").notNull(),
-  color: text("color"),
+  name: text("name"),
+  type: text("type").notNull(),
+  color: text("color").notNull(),
+  formality: text("formality").notNull(),
+  style: text("style").notNull(),
+  tempRange: text("temp_range"),
+  precipitation: text("precipitation"),
   imagePath: text("image_path"),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
-export type ClosetItem = typeof closetItems.$inferSelect;
-export type NewClosetItem = typeof closetItems.$inferInsert;
+export type Item = typeof items.$inferSelect;
+export type NewItem = typeof items.$inferInsert;

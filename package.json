@@ -8,6 +8,7 @@
     "start": "tsx server/src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx server/src/db/migrate.ts",
+    "db:seed": "tsx server/src/db/seed.ts",
     "db:studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit"
   },

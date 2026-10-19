@@ -13,9 +13,11 @@ npm install
 cp .env.example .env
 npm run db:generate
 npm run db:migrate
+npm run db:seed
 npm run dev
 ```
 
 The server exposes `GET /health` to report API and database availability.
 Drizzle schema definitions live in `server/src/db/schema.ts`; generated SQL
-migrations are stored in `drizzle/`.
+migrations are stored in `drizzle/`. The seed command inserts one sample item
+and reads it back. It is safe to rerun without duplicating that sample.

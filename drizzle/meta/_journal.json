@@ -15,6 +15,20 @@
       "when": 1792376654280,
       "tag": "0001_marvelous_wither",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1792377509902,
+      "tag": "0002_create_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1792377522977,
+      "tag": "0003_items",
+      "breakpoints": true
     }
   ]
 }
