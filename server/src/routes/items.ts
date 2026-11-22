@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { db } from '../db/index';
 import { items } from '../db/schema';
+import { eq } from 'drizzle-orm';
+
 
 export const itemsRouter = Router();
 
@@ -13,7 +15,7 @@ const ENUMS = {
   precipitation: items.precipitation.enumValues,
 } as Record<string, readonly string[]>;
 
-
+//POST
 itemsRouter.post('/', async (req, res) => {
   const missing = REQUIRED.filter((field) => !req.body[field]);
 
@@ -41,3 +43,31 @@ itemsRouter.post('/', async (req, res) => {
   res.status(201).json(created);
 });
 
+
+//GET ITEMS
+itemsRouter.get('/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id) || id <= 0) {
+    res.status(400).json({ error: 'Invalid item id' });
+    return;
+  }
+
+  const [item] = await db
+    .select()
+    .from(items)
+    .where(eq(items.id, id))
+    .limit(1);
+
+  if (!item) {
+    res.status(404).json({ error: 'Item not found' });
+    return;
+  }
+
+  res.json(item);
+});
+
+itemsRouter.get('/', async (_req, res) => {
+  const allItems = await db.select().from(items);
+  res.json(allItems);
+});
